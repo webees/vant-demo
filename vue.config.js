@@ -26,7 +26,7 @@ module.exports = {
       vue: 'Vue',
       vuex: 'Vuex',
       axios: 'axios',
-      vant: 'Vant'
+      vant: 'vant'
     }
   },
   chainWebpack: webpackConfig => {
