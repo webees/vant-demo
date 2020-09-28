@@ -1,15 +1,17 @@
 <template>
   <div>
-    <router-view />
+    <hello-world />
   </div>
 </template>
 
 <script>
 export default {
-  name: 'App',
-  watch: {
-    $route() {
-      window.document.title = this.$t(this.$route.meta.title)
+  name: 'Home',
+  data: () => ({}),
+  methods: {},
+  i18n: {
+    messages: {
+      zhCN: {}
     }
   }
 }
