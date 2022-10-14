@@ -1,19 +1,17 @@
-import Vue from 'vue'
-import App from '@/App.vue'
+import { createApp } from 'vue'
 
+import App from '@/App.vue'
 import router from '@/router'
-import store from '@/store'
+import store from '@/stores'
 import i18n from '@/i18n'
 
 import '@/plugins'
-import '@/components'
 import '@/registerServiceWorker'
 
-Vue.config.productionTip = false
+export const app = createApp(App)
 
-new Vue({
-  router,
-  store,
-  i18n,
-  render: h => h(App)
-}).$mount('#app')
+app.use(router)
+app.use(store)
+app.use(i18n)
+
+router.isReady().then(() => app.mount('#app'))

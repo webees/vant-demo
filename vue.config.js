@@ -1,3 +1,5 @@
+const { VantResolver } = require('unplugin-vue-components/resolvers')
+const ComponentsPlugin = require('unplugin-vue-components/webpack')
 const IS_DEV = process.env.NODE_ENV === 'production' ? false : true
 
 const vueBuild = c => {
@@ -46,8 +48,9 @@ const vueConfig = {
     loaderOptions: {}
   },
   devServer: {
-    open: true,
+    host: 'localhost',
     port: 8888,
+    open: true,
     proxy: null
   },
   configureWebpack: {
@@ -55,10 +58,14 @@ const vueConfig = {
       'vue-router': 'VueRouter',
       'vue-i18n': 'VueI18n',
       vue: 'Vue',
-      vuex: 'Vuex',
       axios: 'axios',
       vant: 'vant'
-    }
+    },
+    plugins: [
+      ComponentsPlugin({
+        resolvers: [VantResolver()]
+      })
+    ]
   },
   chainWebpack: c => (IS_DEV ? vueServe(c) : vueBuild(c))
 }
