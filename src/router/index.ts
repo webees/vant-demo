@@ -1,49 +1,49 @@
-import Vue from 'vue'
-import VueRouter, { RouteConfig } from 'vue-router'
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 
-const originalPush: any = VueRouter.prototype.push
-VueRouter.prototype.push = function push(location: any) {
-  return originalPush.call(this, location).catch((err: any) => err)
-}
-
-Vue.use(VueRouter)
+// const originalPush: any = VueRouter.prototype.push
+// VueRouter.prototype.push = function push(location: any) {
+//   return originalPush.call(this, location).catch((err: any) => err)
+// }
 
 const files = require.context('.', true, /\.ts$/)
-const modules: Array<RouteConfig> = []
+const modules: Array<RouteRecordRaw> = []
 files.keys().forEach(k => {
   if (k === './index.ts') return
   modules.push(files(k).default)
 })
 
-const routes: Array<RouteConfig> = [
+const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    redirect: '/Home'
+    redirect: '/home'
   },
   {
-    path: '/Home',
+    path: '/home',
     meta: {
-      title: 'Home'
+      title: 'Home',
+      navbar: false,
+      tabbar: true
     },
     component: () => import(/* webpackChunkName: "Home" */ '@/views/Home.vue')
   },
   ...modules
 ]
 
-const router = new VueRouter({
+const router = createRouter({
+  history: createWebHistory(process.env.BASE_URL),
   routes,
-  mode: 'history',
-  base: process.env.BASE_URL,
   linkActiveClass: 'active',
   scrollBehavior(to, from, savedPosition) {
     to || from
     if (savedPosition) return savedPosition
-    return { x: 0, y: 0 }
+    return { left: 0, top: 0 }
   }
 })
 
 router.beforeEach((to, from, next) => {
-  to || from
+  if (to.meta.title) {
+    window.document.title = to.meta.title as string
+  }
   next()
 })
 

@@ -4,17 +4,6 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'Home',
-  data: () => ({}),
-  methods: {},
-  i18n: {
-    messages: {
-      zhCN: {}
-    }
-  }
-}
-</script>
+<script setup></script>
 
 <style lang="less" scoped></style>

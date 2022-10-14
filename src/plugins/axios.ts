@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import { app } from '@/main'
 import Axios from 'axios'
 
-Vue.prototype.$http = Axios
+app.config.globalProperties.$axios = Axios
