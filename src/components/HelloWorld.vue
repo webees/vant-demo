@@ -1,11 +1,15 @@
 <template>
   <span>
+    <img src="@/assets/logo.png" />
+    <br />
     <select v-model="locale">
       <option>zhCN</option>
       <option>enUS</option>
       <option>jaJP</option>
     </select>
-    <van-button type="primary">{{ locale }} {{ $t('hello') }}</van-button>
+    <br />
+    <br />
+    <van-button type="primary">{{ locale }} : {{ $t('hello') }}</van-button>
   </span>
 </template>
 

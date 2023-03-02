@@ -55,10 +55,11 @@ export default {
       default: 'enUS',
       fallbackLocale: 'enUS',
       silentTranslationWarn: false,
-      // globalInjection: true,
+      globalInjection: true,
       messages
     })
     vueApp.use(I18N)
     loadLocaleMessages(DEFAULT_LANG)
-  }
+  },
+  t: (v: string) => I18N.global.t(v)
 }

@@ -17,15 +17,6 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     redirect: '/home'
   },
-  {
-    path: '/home',
-    meta: {
-      title: 'Home',
-      navbar: false,
-      tabbar: true
-    },
-    component: () => import(/* webpackChunkName: "Home" */ '@/views/Home.vue')
-  },
   ...modules
 ]
 
@@ -41,9 +32,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.meta.title) {
-    window.document.title = to.meta.title as string
-  }
+  to || from
   next()
 })
 

@@ -1,14 +1,26 @@
 <template>
-  <span>
-    <b>{{ msg }}</b>
+  <div>
     <router-view />
-    <!-- 导航栏 -->
     <tab-bar v-show="$route.meta.tabbar" />
-  </span>
+  </div>
 </template>
 
 <script lang="ts" setup>
-const msg = 'hello world!'
+import { watch } from 'vue'
+import { useRoute } from 'vue-router'
+import i18n from '@/i18n'
+
+const route = useRoute()
+
+watch(
+  () => route.meta.title,
+  v => {
+    if (v) {
+      window.document.title = i18n.t(v as string)
+    }
+  },
+  { immediate: true }
+)
 </script>
 
 <style lang="less" scoped></style>
